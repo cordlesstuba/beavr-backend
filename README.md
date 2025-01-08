@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Beavr Backend Test
 
-## Getting Started
+## Instructions
+Follow these steps to set up and run the Beavr backend project:
 
-First, run the development server:
+### 1. Clone the Repository
+Clone the project repository to your local machine:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/cordlesstuba/beavr-backend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Navigate to the Project Root
+Move into the project directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd beavr-backend
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Install Dependencies
+Install all project dependencies:
 
-## Learn More
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Start the PostgreSQL Database
+Start the PostgreSQL database using Docker Compose:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+docker-compose up -d
+```
 
-## Deploy on Vercel
+### 5. Apply Database Migrations
+Run Prisma to apply the database migrations:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npx prisma migrate dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 6. Generate Prisma Client
+Generate the Prisma client:
+
+```bash
+npx prisma generate
+```
+
+### 7. Seed the Database
+Seed the database with initial data:
+
+```bash
+npx prisma db seed
+```
+
+### 8. Start the Development Server
+Start the backend development server:
+
+```bash
+pnpm run dev
+```
+
+### 9. Access the Application
+The application will be available at:
+[http://localhost:3000](http://localhost:3000)
+
+### 10. Access the Hosted Version
+If you prefer not to run the project locally, a hosted version is available at:  
+[https://beavr-backend.vercel.app/](https://beavr-backend.vercel.app/)
+
+
+---
+
+## Demo Video
+For a quick walkthrough, watch the demo video below:
+
+[![Beavr Backend Demo](https://img.youtube.com/vi/1_5CshdZ4Jo/0.jpg)](https://youtu.be/1_5CshdZ4Jo)
+Click on the thumbnail or [here](https://youtu.be/1_5CshdZ4Jo) to view the video.
+
+---
+
+You are now ready to work on the Beavr backend test project. 🚀
