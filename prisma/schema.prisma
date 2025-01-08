@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Document {
+  id           String            @id @default(cuid())
+  key          String            @unique
+  name         String
+  description  String
+  requirements Requirement[]
+  versions     DocumentVersion[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model DocumentVersion {
+  id            String   @id @default(cuid())
+  versionNumber String
+  fileUrl       String
+  expiresAt     DateTime
+
+  documentId String
+  document   Document    @relation(fields: [documentId], references: [id])
+  validation Validation?
+  deletedAt  DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Validation {
+  id                String          @id @default(uuid())
+  validatedAt       DateTime        @default(now())
+  remarks           String?
+  documentVersionId String          @unique
+  documentVersion   DocumentVersion @relation(fields: [documentVersionId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Requirement {
+  id          String     @id @default(cuid())
+  name        String
+  description String
+  documents   Document[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
