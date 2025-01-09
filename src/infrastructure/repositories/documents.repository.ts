@@ -108,7 +108,7 @@ export class DocumentsRepository implements IDocumentsRepository {
       },
     });
 
-    if (!document) {
+    if (!documentVersion) {
       throw new NotFoundError(`Document Version Not found - ID: ${id}`);
     }
 

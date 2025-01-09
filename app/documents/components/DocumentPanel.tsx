@@ -17,13 +17,10 @@ import {
 import { cn } from "@/lib/utils";
 import { useGlobalStore } from "@/store/global";
 import { ThumbsDown, ThumbsUp, Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export function DocumentPanel() {
-  const router = useRouter();
-
   const {
     isDocumentPanelOpen,
     isNewVersionDialogOpen,
@@ -39,7 +36,6 @@ export function DocumentPanel() {
     await validateDocumentVersion(formData);
     fetchDocument();
     toast.success("Document version validated !");
-    router.refresh();
   };
 
   const onInValidateDocumentVersion = async (id: string) => {
@@ -48,7 +44,6 @@ export function DocumentPanel() {
     await invalidateDocumentVersion(formData);
     fetchDocument();
     toast.success("Document version invalidated !");
-    router.refresh();
   };
 
   const onDeleteDocumentVersion = async (id: string) => {
@@ -57,7 +52,6 @@ export function DocumentPanel() {
     await deleteDocumentVersion(formData);
     fetchDocument();
     toast.success("Document version deleted !");
-    router.refresh();
   };
 
   const fetchDocument = async () => {

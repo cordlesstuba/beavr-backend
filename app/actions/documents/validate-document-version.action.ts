@@ -2,6 +2,7 @@
 
 import { getInjection } from "@/di/container";
 import { InputParseError, NotFoundError } from "@/src/entities/errors/common";
+import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const validateVersionSchema = z.object({
@@ -23,15 +24,12 @@ export async function validateDocumentVersion(formData: FormData) {
     };
   }
 
-  let documentVersion;
   try {
     const { documentVersionId } = validatedFields.data;
 
-    documentVersion = await validateDocumentVersionController(
-      documentVersionId
-    );
-    return documentVersion;
+    await validateDocumentVersionController(documentVersionId);
   } catch (err) {
+    console.log(err);
     if (err instanceof NotFoundError) {
       return { error: "Document Version not found" };
     }
@@ -43,4 +41,5 @@ export async function validateDocumentVersion(formData: FormData) {
         "An error happened while validating a document version. The developers have been notified. Please try again later.",
     };
   }
+  revalidatePath("/documents");
 }
