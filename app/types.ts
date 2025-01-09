@@ -18,3 +18,10 @@ export type Document = {
   description: string;
   versions: Version[];
 };
+
+export type Requirement = {
+  id: string;
+  name: string;
+  description: string;
+  progress: number;
+};

@@ -7,14 +7,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Requirement } from "../types";
 
 interface DataTableProps {
-  requirements: {
-    id: string;
-    name: string;
-    description: string;
-    progress: number;
-  }[];
+  requirements: Requirement[];
 }
 
 export function DataTable({ requirements }: DataTableProps) {
