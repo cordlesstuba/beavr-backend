@@ -1,5 +1,18 @@
 # Beavr Backend Test
 
+## Project Folder Structure
+
+```plaintext
+.
+├── app/           # Next.js app source (server actions, pages)
+├── component/     # Global components
+├── di/            # Dependency injection
+├── src/           # Business logic (framework-independent)
+├── store/         # Global state management
+├── test/          # Test files
+```
+
+
 ## Instructions
 Follow these steps to set up and run the Beavr backend project:
 
