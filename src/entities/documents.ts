@@ -1,3 +1,4 @@
+import { getInjection } from "@/di/container";
 import { DocumentVersion } from "./document-version";
 
 export enum DocumentStatus {
@@ -6,6 +7,8 @@ export enum DocumentStatus {
 }
 
 export class Document {
+  private dateTimeService = getInjection("IDateTimeService");
+
   constructor(
     public id: string,
     public name: string,
@@ -19,7 +22,7 @@ export class Document {
       latestVersion &&
       latestVersion.validation &&
       latestVersion.validation.validatedAt &&
-      latestVersion.expiresAt > new Date()
+      latestVersion.expiresAt > this.dateTimeService.getCurrentDateTime()
     ) {
       return DocumentStatus.VALIDATED;
     }
